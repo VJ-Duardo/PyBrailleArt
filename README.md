@@ -1,6 +1,6 @@
-# braille-ascii-inverter
+# braille-unicode-inverter
 
-This script invertes ascii-art made up of braille characters to the opposite "color".
+This script invertes unicode-art made up of braille characters to the opposite "color".
 
 For example this:
 

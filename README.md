@@ -98,4 +98,7 @@ For example, 90°:
 ⣿⣿⣿⣿⣦⣀⠀⡂⠀⡂⠀⡂⠀⡂⠀⡂⠀⢂⣴⣶⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀ <br> 
 ⣿⣿⣿⣿⣿⣿⣷⣦⣄⡂⠀⡂⢀⣢⣴⣦⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧ </p>
 
-Like the invert function, these functions have an option to replace blank braille characters with single dot braille characters.
+Like the invert function, these functions have an option to replace blank braille characters with single dot braille characters. 
+<br><br>
+Every line should have an even amount of characters. If not, the last single character of each line will get ignored and will not show up in the end result.
+

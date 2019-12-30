@@ -28,7 +28,10 @@ def turn_90(input_str, dot_for_blank=False):
     for line in line_arr:
         line_chunks = [line[i:i + 2] for i in range(0, len(line), 2)]
         for j in range(0, len(line_chunks), 1):
-            new_chunk = braille_dic_90[line_chunks[j]]
+            try:
+                new_chunk = braille_dic_90[line_chunks[j]]
+            except KeyError:
+                new_chunk = ''
             new_line_arr[j] = new_chunk + new_line_arr[j]
 
     if dot_for_blank:

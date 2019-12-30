@@ -1,67 +1,53 @@
 # -*- coding: utf-8 -*-
 
-braille_str_invert = "⠀⣿⠁⣾⠂⣽⠃⣼⠄⣻⠅⣺⠆⣹⠇⣸⠈⣷⠉⣶⠊⣵⠋⣴⠌⣳⠍⣲⠎⣱⠏⣰⠐⣯⠑⣮⠒⣭⠓⣬⠔⣫⠕⣪⠖⣩⠗⣨⠘⣧" \
-                     "⠙⣦⠚⣥⠛⣤⠜⣣⠝⣢⠞⣡⠟⣠⠠⣟⠡⣞⠢⣝⠣⣜⠤⣛⠥⣚⠦⣙⠧⣘⠨⣗⠩⣖⠪⣕⠫⣔⠬⣓⠭⣒⠮⣑⠯⣐⠰⣏⠱⣎" \
-                     "⠲⣍⠳⣌⠴⣋⠵⣊⠶⣉⠷⣈⠸⣇⠹⣆⠺⣅⠻⣄⠼⣃⠽⣂⠾⣁⠿⣀⡀⢿⡁⢾⡂⢽⡃⢼⡄⢻⡅⢺⡆⢹⡇⢸⡈⢷⡉⢶⡊⢵" \
-                     "⡋⢴⡌⢳⡍⢲⡎⢱⡏⢰⡐⢯⡑⢮⡒⢭⡓⢬⡔⢫⡕⢪⡖⢩⡗⢨⡘⢧⡙⢦⡚⢥⡛⢤⡜⢣⡝⢢⡞⢡⡟⢠⡠⢟⡡⢞⡢⢝⡣⢜" \
-                     "⡤⢛⡥⢚⡦⢙⡧⢘⡨⢗⡩⢖⡪⢕⡫⢔⡬⢓⡭⢒⡮⢑⡯⢐⡰⢏⡱⢎⡲⢍⡳⢌⡴⢋⡵⢊⡶⢉⡷⢈⡸⢇⡹⢆⡺⢅⡻⢄⡼⢃" \
-                     "⡽⢂⡾⢁⡿⢀"
-
-braille_str_180 = "⠁⢀⠂⠠⠃⢠⠄⠐⠅⢐⠆⠰⠇⢰⠈⡀⠉⣀⠊⡠⠋⣠⠌⡐⠍⣐⠎⡰⠏⣰⠑⢄⠒⠤⠓⢤⠔⠔⠕⢔⠖⠴⠗⢴⠘⡄⠙⣄⠚⡤⠛⣤" \
-                  "⠜⡔⠝⣔⠞⡴⠟⣴⠡⢂⠢⠢⠣⢢⠥⢒⠦⠲⠧⢲⠨⡂⠩⣂⠪⡢⠫⣢⠬⡒⠭⣒⠮⡲⠯⣲⠱⢆⠳⢦⠵⢖⠶⠶⠷⢶⠸⡆⠹⣆⠺⡦" \
-                  "⠻⣦⠼⡖⠽⣖⠾⡶⠿⣶⡁⢈⡃⢨⡅⢘⡇⢸⡈⡈⡉⣈⡊⡨⡋⣨⡌⡘⡍⣘⡎⡸⡏⣸⡑⢌⡓⢬⡕⢜⡗⢼⡙⣌⡚⡬⡛⣬⡜⡜⡝⣜" \
-                  "⡞⡼⡟⣼⡡⢊⡣⢪⡥⢚⡧⢺⡩⣊⡪⡪⡫⣪⡭⣚⡮⡺⡯⣺⡱⢎⡳⢮⡵⢞⡷⢾⡹⣎⡻⣮⡽⣞⡾⡾⡿⣾⢁⢁⢃⢡⢅⢑⢇⢱⢉⣁" \
-                  "⢋⣡⢍⣑⢏⣱⢓⢥⢕⢕⢗⢵⢙⣅⢛⣥⢝⣕⢟⣵⢣⢣⢧⢳⢩⣃⢫⣣⢭⣓⢯⣳⢷⢷⢹⣇⢻⣧⢽⣗⢿⣷⣉⣉⣋⣩⣍⣙⣏⣹⣛⣭" \
-                  "⣝⣝⣟⣽⣫⣫⣯⣻⣿⣿"
+from braille import *
 
 
-def create_braille_dic(braille_str):
-    braille_dic = {}
-    for i in range(0, len(braille_str), 2):
-        braille_dic[braille_str[i]] = braille_str[i + 1]
-        braille_dic[braille_str[i + 1]] = braille_str[i]
+def invert(input_str, dot_for_blank=False):
+    braille_dic_invert = create_invert_dic()
 
-    return braille_dic
+    if dot_for_blank:
+        braille_dic_invert['⣿'] = '⠄'
+        braille_dic_invert['⠄'] = '⣿'
 
-
-def replace_str_chars(input_str, braille_dic):
-    new_str = ""
+    result_str = ""
     for i in range(0, len(input_str), 1):
         try:
-            new_str += braille_dic[input_str[i]]
+            result_str += braille_dic_invert[input_str[i]]
         except KeyError:
-            new_str += input_str[i]
-
-    return new_str
-
-
-def invert(input_str):
-    braille_dic_invert = create_braille_dic(braille_str_invert)
-
-    # you may want to comment these out if you want to have '⣿' be replaced with an invisible '⠀' character instead of '⠄'
-    braille_dic_invert['⣿'] = '⠄'
-    braille_dic_invert['⠄'] = '⣿'
-
-    result_str = replace_str_chars(input_str, braille_dic_invert)
+            result_str += input_str[i]
 
     return result_str
 
 
-def turn(input_str):
-    braille_dic_180 = create_braille_dic(braille_str_180)
+def turn_90(input_str, dot_for_blank=False):
+    braille_dic_90 = create_turn90_dic()
 
-    replaced_str = replace_str_chars(input_str, braille_dic_180)
+    line_arr = input_str.split(" ")
+    new_line_arr = [''] * len(line_arr)
+    for line in line_arr:
+        line_chunks = [line[i:i + 2] for i in range(0, len(line), 2)]
+        for j in range(0, len(line_chunks), 1):
+            new_chunk = braille_dic_90[line_chunks[j]]
+            new_line_arr[j] = new_chunk + new_line_arr[j]
 
-    line_arr = replaced_str.split(" ")
-    result_str = ""
-    for i in range(len(line_arr) - 1, 0 - 1, -1):
-        reversed_line = line_arr[i][len(line_arr[i])::-1]
-        result_str += reversed_line + " "
-
-    return result_str
+    if dot_for_blank:
+        return ' '.join(new_line_arr).replace('⠀', '⠄')
+    else:
+        return ' '.join(new_line_arr)
 
 
-braille_input_str = """⣿⣿⣿⣿⣿⣿⣿⡿⠟⠛⠉⠉⠉⠉⠋⠉⠉⠙⠛⠛⠻⠿⢿⣿⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⠿⠋⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠈⠉⠻⣿⣿⣿⣿⣿ ⣿⣿⡟⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠙⢻⣿⣿⣿ ⣿⠏⠄⠄⠄⠄⠄⠄⠄⠄⢀⣔⢤⣄⡀⠄⡄⡀⠄⠄⠄⠄⠄⠄⠄⠄⠄⢻⣿⣿  ⠏⠄⠄⠄⠄⠄⠄⠄⢀⣀⣨⣵⣿⣿⣿⣿⣧⣦⣤⣀⣿⣷⡐⠄⠄⠄⠄⠄⢿⣿ ⠄⠄⠄⠄⠄⠄⠐⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀⠄⠄⠄⢚⣿ ⣆⠄⠄⠄⠄⠄⠄⢻⣿⣿⣿⣿⡿⠛⠛⠛⠛⣿⢿⣿⣿⣿⡿⢟⣻⣄⣤⣮⡝⣿  ⣿⠆⠄⠄⠄⠄⠄⠄⠄⠄⠉⠘⣿⡗⡕⣋⢉⣩⣽⣬⣭⣶⣿⣿⣿⣿⣝⣻⣷⣿ ⣿⣦⡀⠄⠄⠠⢀⠄⠄⠁⠄⠄⣿⣿⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⣿ ⣿⣿⣿⡆⠄⠄⠰⣶⡗⠄⠄⠄⣿⣿⣿⣿⣦⣌⠙⠿⣿⣿⣿⣿⣿⣿⣿⡛⠱⢿  ⣿⣿⣿⣿⡀⠄⠄⠿⣿⠄⠄⠄⠨⡿⠿⠿⣿⣟⣿⣯⣹⣿⣿⣿⣿⣿⣿⣿⣦⡀ ⣿⣿⣿⣿⣷⠄⠄⠄⢷⣦⠄⠄⠐⢶⢾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇ ⣿⣿⣿⣿⣿⣧⡄⠄⠄⠉⠄⠄⠄⢉⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠄ ⣿⣿⣿⣿⣿⠟⠋⠄⠄⠄⠄⠄⠄⠈⠛⠿⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠄⠄ ⣿⠿⠛⠉⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠘⠿⢿⣿⣿⣿⣿⣿⠿⠋⠄⠄⠄⠄ """
+def turn_180(input_str, dot_for_blank=False):
+    return turn_90(turn_90(input_str, dot_for_blank), dot_for_blank)
+
+
+def turn_270(input_str, dot_for_blank=False):
+    return turn_90(turn_180(input_str, dot_for_blank), dot_for_blank)
+
+
+braille_input_str = """⣿⣿⣿⣿⣿⣿⣿⡿⠟⠛⠉⠉⠉⠉⠋⠉⠉⠙⠛⠛⠻⠿⢿⣿⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⠿⠋⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠈⠉⠻⣿⣿⣿⣿⣿ ⣿⣿⡟⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠙⢻⣿⣿⣿ ⣿⠏⠄⠄⠄⠄⠄⠄⠄⠄⢀⣔⢤⣄⡀⠄⡄⡀⠄⠄⠄⠄⠄⠄⠄⠄⠄⢻⣿⣿ ⠏⠄⠄⠄⠄⠄⠄⠄⢀⣀⣨⣵⣿⣿⣿⣿⣧⣦⣤⣀⣿⣷⡐⠄⠄⠄⠄⠄⢿⣿ ⠄⠄⠄⠄⠄⠄⠐⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀⠄⠄⠄⢚⣿ ⣆⠄⠄⠄⠄⠄⠄⢻⣿⣿⣿⣿⡿⠛⠛⠛⠛⣿⢿⣿⣿⣿⡿⢟⣻⣄⣤⣮⡝⣿ ⣿⠆⠄⠄⠄⠄⠄⠄⠄⠄⠉⠘⣿⡗⡕⣋⢉⣩⣽⣬⣭⣶⣿⣿⣿⣿⣝⣻⣷⣿ ⣿⣦⡀⠄⠄⠠⢀⠄⠄⠁⠄⠄⣿⣿⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⣿ ⣿⣿⣿⡆⠄⠄⠰⣶⡗⠄⠄⠄⣿⣿⣿⣿⣦⣌⠙⠿⣿⣿⣿⣿⣿⣿⣿⡛⠱⢿ ⣿⣿⣿⣿⡀⠄⠄⠿⣿⠄⠄⠄⠨⡿⠿⠿⣿⣟⣿⣯⣹⣿⣿⣿⣿⣿⣿⣿⣦⡀ ⣿⣿⣿⣿⣷⠄⠄⠄⢷⣦⠄⠄⠐⢶⢾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇ ⣿⣿⣿⣿⣿⣧⡄⠄⠄⠉⠄⠄⠄⢉⣽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠄ ⣿⣿⣿⣿⣿⠟⠋⠄⠄⠄⠄⠄⠄⠈⠛⠿⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠄⠄ ⣿⠿⠛⠉⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠘⠿⢿⣿⣿⣿⣿⣿⠿⠋⠄⠄⠄⠄ """
 
 print(invert(braille_input_str))
-print(turn(braille_input_str))
+print(turn_90(braille_input_str))
+print(turn_180(braille_input_str))
+print(turn_270(braille_input_str))

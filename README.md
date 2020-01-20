@@ -1,6 +1,14 @@
-﻿# braille-unicode-inverter
+﻿# PyBraille
+This library can transform unicode-art made up of braille characters. It can invert and rotate any given unicode-art string.
 
-This script can transform unicode-art made up of braille characters. It can invert and rotate any given unicode-art string.
+## Usage
+Include both files *braille.py* and *braille_data.py* and import the functions with `from braille import *`. All functions take two parameters: 
+ * input (*string*)
+     * for best results every line should have an even amount of characters
+     * the lines should be separated by spaces or newlines
+ * [optional] dot_for_blank (*boolean*)
+     * explained further below
+
 
 ## Invert
 For example this:
@@ -39,7 +47,7 @@ can be converted to this:
 ⠄⠄⠄⠄⠄⣠⣴⣿⣿⣿⣿⣿⣿⣷⣤⣀⣀⠄⠄⠄⠄⠄⠄⠄⠄⠄⢀⣴⣿⣿ ⠀⠀⠀⠀⠀⣠⣴⣻⣻⣻⣻⣻⣻⣷⣤⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣻⣻ <br> 
 ⠄⣀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⣀⡀⠄⠄⠄⠄⠄⣀⣴⣿⣿⣿⣿⠀⣀⣤⣶⣻⣻⣻⣻⣻⣻⣻⣻⣻⣻⣻⣻⣧⣀⡀⠀⠀⠀⠀⠀⣀⣴⣻⣻⣻⣻ </p>  
 
-The right-hand outcome is the default option. Giving a `True` boolean to the function will convert blank braille characters to single dot braille characters, giving the left-hand outcome. <br><br>
+The right-hand outcome is the default option. Giving a `True` boolean for `dot_for_blank` to the function will convert blank braille characters to single dot braille characters, giving the left-hand outcome. <br><br>
 Due to the blank braille character being more narrow than the other braille characters, some lines can differ in length. Putting the option will combat this, but the look of the outcome may differ, especially when rotating. But generally, either option can look better depending on the input.
 
 ## Rotate
@@ -98,7 +106,7 @@ For example, 90°:
 ⣿⣿⣿⣿⣦⣀⠀⡂⠀⡂⠀⡂⠀⡂⠀⡂⠀⢂⣴⣶⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀ <br> 
 ⣿⣿⣿⣿⣿⣿⣷⣦⣄⡂⠀⡂⢀⣢⣴⣦⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧ </p>
 
-Like the invert function, these functions have an option to replace blank braille characters with single dot braille characters. 
+Like the invert function, these functions have the `dot_for_blank` option to replace blank braille characters with single dot braille characters. 
 <br><br>
 Every line should have an even amount of characters. If not, the last single character of each line will get ignored and will not show up in the end result.
 

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 braille_descr_dic = {
     '': '⠀',
     '1': '⠁',

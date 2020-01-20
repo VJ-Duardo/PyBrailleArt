@@ -1,4 +1,4 @@
-﻿# PyBraille
+﻿# PyBrailleArt
 This library can transform unicode-art made up of braille characters. It can invert and rotate any given unicode-art string.
 
 ## Usage
@@ -51,7 +51,8 @@ The right-hand outcome is the default option. Giving a `True` boolean for `dot_f
 Due to the blank braille character being more narrow than the other braille characters, some lines can differ in length. Putting the option will combat this, but the look of the outcome may differ, especially when rotating. But generally, either option can look better depending on the input.
 
 ## Rotate
-This script also allows an unicode-art string to be rotated 90°, 180° and 270°.
+This script also allows an unicode-art string to be rotated 90°, 180° and 270°. <br>
+*(Note that after rotating any newlines in the string won't be preserved, instead the output will be separated by spaces)* <br><br>
 For example, 90°:
 
 <p>⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠻⠟⠫⠁⠨⠀⠨⠙⠻⢿⣿⣿⣿⣿⣿⣿ <br> 

@@ -12,6 +12,9 @@ def invert(input_str, dot_for_blank=False):
     if dot_for_blank:
         braille_dic_invert['⣿'] = '⠄'
         braille_dic_invert['⠄'] = '⣿'
+    else:
+        braille_dic_invert['⣿'] = '⠀'
+        braille_dic_invert['⠄'] = '⢿'
 
     result_str = ""
     for i in range(0, len(input_str), 1):

@@ -6,6 +6,7 @@ from braille_data import *
 
 braille_dic_invert = create_invert_dic()
 braille_dic_90 = create_turn90_dic()
+braille_dic_mirror = create_mirror_dic()
 
 
 def invert(input_str, dot_for_blank=False):
@@ -26,8 +27,26 @@ def invert(input_str, dot_for_blank=False):
     return result_str
 
 
+
+def mirror(input_str, dot_for_blank=False):
+    line_arr = list(filter(None, re.split(" |\n", input_str)))
+    results_arr = [''] * len(line_arr)
+    for i in range(0, len(line_arr), 1):
+        for j in range(len(line_arr[i])-1, -1, -1):
+            try:
+                results_arr[i] += braille_dic_mirror[line_arr[i][j]]
+            except KeyError:
+                results_arr[i] += line_arr[i][j]
+
+    if dot_for_blank:
+        return ' '.join(results_arr).replace('⠀', '⠄')
+    else:
+        return ' '.join(results_arr)
+
+
+
 def turn_90(input_str, dot_for_blank=False):
-    line_arr = re.split(" |\n", input_str)
+    line_arr = list(filter(None, re.split(" |\n", input_str)))
     longest_line = len(max(line_arr, key=len))
     new_line_arr = [' '] * (int(longest_line/2) + longest_line % 2)
 

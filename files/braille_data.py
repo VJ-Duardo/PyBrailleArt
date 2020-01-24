@@ -259,35 +259,33 @@ braille_descr_dic = {
     '12345678': '⣿',
 }
 
-upper_dic_90 = {
-    '1': '4',
-    '2': '1',
-    '4': '5',
-    '5': '2',
-    '3': '4',
-    '6': '5',
-    '7': '1',
-    '8': '2',
-    '0': '0'
-}
-
-lower_dic_90 = {
-    '1': '6',
-    '2': '3',
-    '4': '8',
-    '5': '7',
-    '3': '6',
-    '6': '8',
-    '7': '3',
-    '8': '7',
-    '0': '0'
-}
-
-remove_list_upper = ['3', '6', '7', '8']
-remove_list_lower = ['1', '2', '4', '5']
-
 
 def create_turn90_dic():
+    upper_dic_90 = {
+        '1': '4',
+        '2': '1',
+        '4': '5',
+        '5': '2',
+        '3': '4',
+        '6': '5',
+        '7': '1',
+        '8': '2'
+    }
+
+    lower_dic_90 = {
+        '1': '6',
+        '2': '3',
+        '4': '8',
+        '5': '7',
+        '3': '6',
+        '6': '8',
+        '7': '3',
+        '8': '7'
+    }
+
+    remove_list_upper = ['3', '6', '7', '8']
+    remove_list_lower = ['1', '2', '4', '5']
+
     result_dic = {}
     for key_left in braille_descr_dic:
         for key_right in braille_descr_dic:
@@ -321,12 +319,35 @@ def create_turn90_dic():
 
 def create_invert_dic():
     result_dic = {}
-    braille_descr_elem_nmbrs = [str(i) for i in range(1, 8+1, 1)]
+    braille_descr_elem_nmbrs = [str(i) for i in range(1, 8 + 1, 1)]
     for key in braille_descr_dic:
         inverted_char = ''
         for nmbr in braille_descr_elem_nmbrs:
             if nmbr not in key:
                 inverted_char += nmbr
         result_dic[braille_descr_dic[key]] = braille_descr_dic[inverted_char]
+
+    return result_dic
+
+
+
+def create_mirror_dic():
+    mirrored_values_dic = {
+        '1': '4',
+        '2': '5',
+        '3': '6',
+        '4': '1',
+        '5': '2',
+        '6': '3',
+        '7': '8',
+        '8': '7'
+    }
+
+    result_dic = {}
+    for key in braille_descr_dic:
+        mirrored_key = ''
+        for i in range(0, len(key), 1):
+            mirrored_key += mirrored_values_dic[key[i]]
+        result_dic[braille_descr_dic[key]] = braille_descr_dic[''.join(sorted(mirrored_key))]
 
     return result_dic

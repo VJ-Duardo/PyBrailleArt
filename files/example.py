@@ -27,3 +27,5 @@ print(turn_90(braille_input_str, True))     #rotate 90° but replace invisible c
 
 print(turn_180(braille_input_str))          #rotate 180°
 print(turn_270(braille_input_str))          #rotate 270°
+
+print(mirror(braille_input_str))            #mirror horizontally

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import re
-from braille_data import *
+from brailledata import *
 
 
 braille_dic_invert = create_invert_dic()

@@ -4,12 +4,16 @@ from brailletransform import *
 from braillecreate import *
 from PIL import Image
 
-print(treshold_dithering(pic))
-print(ordered_dithering(pic, width=100, height=100))
-print(floyd_steinberg_dithering(pic, 1, width=100, height=100))
-print(floyd_steinberg_dithering(pic, 128, width=100, height=100))
-print(floyd_steinberg_dithering(pic, 255, width=100, height=100))
+#braillecreate
+pic = Image.open("test.png").convert('RGBA')
 
+print(treshold_dithering(pic))
+print(treshold_dithering(pic, 145, width=100, height=100))
+print(ordered_dithering(pic, width=100, height=100))
+print(floyd_steinberg_dithering(pic, fill_transparency=False, width=100, height=100))
+
+
+#brailletransform
 braille_input_str = """⣿⣿⣿⣿⣿⣿⣿⡿⠟⠛⠉⠉⠉⠉⠋⠉⠉⠙⠛⠛⠻⠿⢿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⠿⠋⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠈⠉⠻⣿⣿⣿⣿⣿
 ⣿⣿⡟⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠙⢻⣿⣿⣿

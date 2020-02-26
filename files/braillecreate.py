@@ -5,10 +5,12 @@ from PIL import Image
 
 
 treshold = 0
+transparency = True
 
-def treshold_dithering(picture, color_treshold=105, line_delimiter='\n', dot_for_blank=True, width=0, height=0):
-    global treshold
+def treshold_dithering(picture, color_treshold=105, line_delimiter='\n', dot_for_blank=True, fill_transparency=True, width=0, height=0):
+    global treshold, transparency
     treshold = color_treshold
+    transparency = fill_transparency
     picture = _resize_pic(picture, width, height)
     result_arr = []
 
@@ -24,7 +26,7 @@ def treshold_dithering(picture, color_treshold=105, line_delimiter='\n', dot_for
         return line_delimiter.join(result_arr)
 
 
-def ordered_dithering(picture, color_treshold=105, line_delimiter='\n', dot_for_blank=True, width=0, height=0):
+def ordered_dithering(picture, color_treshold=128, line_delimiter='\n', dot_for_blank=True, fill_transparency=True, width=0, height=0):
     picture = _resize_pic(picture, width, height)
 
     change_factor = color_treshold/128
@@ -37,10 +39,10 @@ def ordered_dithering(picture, color_treshold=105, line_delimiter='\n', dot_for_
             else:
                 picture.putpixel((x, y), (0, 0, 0, pixel[3]))
 
-    return treshold_dithering(picture, 128, line_delimiter, dot_for_blank, 0, 0)
+    return treshold_dithering(picture, 128, line_delimiter, dot_for_blank, fill_transparency, 0, 0)
 
 
-def floyd_steinberg_dithering(picture, color_treshold=0, line_delimiter='\n', dot_for_blank=True, width=0, height=0):
+def floyd_steinberg_dithering(picture, color_treshold=1, line_delimiter='\n', dot_for_blank=True, fill_transparency=True, width=0, height=0):
     picture = _resize_pic(picture, width, height)
 
     for y in range(0, picture.height, 1):
@@ -67,13 +69,13 @@ def floyd_steinberg_dithering(picture, color_treshold=0, line_delimiter='\n', do
                         new_colors[i] = int(picture.getpixel((x+a, y+b))[i] + (quant_error[i] * q / 16))
                     picture.putpixel((x+a, y+b), (new_colors[0], new_colors[1], new_colors[2], picture.getpixel((x+a, y+b))[3]))
 
-    return treshold_dithering(picture, 128, line_delimiter, dot_for_blank, 0, 0)
+    return treshold_dithering(picture, 128, line_delimiter, dot_for_blank, fill_transparency, 0, 0)
 
 
 def _resize_pic(picture, width, height):
     width = picture.width if width <= 0 else width
     height = picture.height if height <= 0 else height
-    picture = picture.resize((width, height), Image.CUBIC)
+    picture = picture.resize((width, height), Image.LANCZOS)
     return picture
 
 
@@ -98,9 +100,9 @@ def _get_braille_code(picture, x, y):
 
 
 def _evaluate_pixel(red, green, blue, alpha):
-    if alpha == 0:
-        return True
-    if red > treshold or green > treshold or blue > treshold:
-        return True
-    else:
+    if transparency and alpha == 0:
         return False
+    if red > treshold or green > treshold or blue > treshold:
+        return False
+    else:
+        return True

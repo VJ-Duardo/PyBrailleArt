@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from brailletransform import *
+from braillecreate import *
+from PIL import Image
+
+print(treshold_dithering(pic))
+print(ordered_dithering(pic, width=100, height=100))
+print(floyd_steinberg_dithering(pic, 1, width=100, height=100))
+print(floyd_steinberg_dithering(pic, 128, width=100, height=100))
+print(floyd_steinberg_dithering(pic, 255, width=100, height=100))
 
 braille_input_str = """⣿⣿⣿⣿⣿⣿⣿⡿⠟⠛⠉⠉⠉⠉⠋⠉⠉⠙⠛⠛⠻⠿⢿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⠿⠋⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠈⠉⠻⣿⣿⣿⣿⣿

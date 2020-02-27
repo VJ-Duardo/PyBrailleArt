@@ -4,6 +4,7 @@ from brailletransform import *
 from braillecreate import *
 from PIL import Image
 
+
 #braillecreate
 pic = Image.open("test.png").convert('RGBA')
 
@@ -30,14 +31,14 @@ braille_input_str = """⣿⣿⣿⣿⣿⣿⣿⡿⠟⠛⠉⠉⠉⠉⠋⠉⠉⠙⠛
 ⣿⣿⣿⣿⣿⠟⠋⠄⠄⠄⠄⠄⠄⠈⠛⠿⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠄⠄
 ⣿⠿⠛⠉⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠘⠿⢿⣿⣿⣿⣿⣿⠿⠋⠄⠄⠄⠄"""
 
-print(invert(braille_input_str))            #invert
-print(invert(braille_input_str, True))      #invert but convert ⣿ to ⠄ instead of invisible chars
+print(invert(braille_input_str))                            #invert
+print(invert(braille_input_str, dot_for_blank=True))        #invert but convert ⣿ to ⠄ instead of invisible chars
 
 
-print(turn_90(braille_input_str))           #rotate 90°
-print(turn_90(braille_input_str, True))     #rotate 90° but replace invisible chars with ⠄
+print(turn_90(braille_input_str))                           #rotate 90°
+print(turn_90(braille_input_str, dot_for_blank=True))       #rotate 90° but replace invisible chars with ⠄
 
-print(turn_180(braille_input_str))          #rotate 180°
-print(turn_270(braille_input_str))          #rotate 270°
+print(turn_180(braille_input_str))                          #rotate 180°
+print(turn_270(braille_input_str))                          #rotate 270°
 
-print(mirror(braille_input_str))            #mirror horizontally
+print(mirror(braille_input_str))                            #mirror horizontally

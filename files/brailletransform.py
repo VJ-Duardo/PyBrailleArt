@@ -28,7 +28,7 @@ def invert(input_str, dot_for_blank=False):
 
 
 
-def mirror(input_str, dot_for_blank=False):
+def mirror(input_str, line_delimiter='\n', dot_for_blank=False):
     line_arr = list(filter(None, re.split(" |\n", input_str)))
     results_arr = [''] * len(line_arr)
     for i in range(0, len(line_arr), 1):
@@ -39,13 +39,13 @@ def mirror(input_str, dot_for_blank=False):
                 results_arr[i] += line_arr[i][j]
 
     if dot_for_blank:
-        return ' '.join(results_arr).replace('⠀', '⠄')
+        return line_delimiter.join(results_arr).replace('⠀', '⠄')
     else:
-        return ' '.join(results_arr)
+        return line_delimiter.join(results_arr)
 
 
 
-def turn_90(input_str, dot_for_blank=False):
+def turn_90(input_str, line_delimiter='\n', dot_for_blank=False):
     line_arr = list(filter(None, re.split(" |\n", input_str)))
     longest_line = len(max(line_arr, key=len))
     new_line_arr = [' '] * (int(longest_line/2) + longest_line % 2)
@@ -63,14 +63,14 @@ def turn_90(input_str, dot_for_blank=False):
             new_line_arr[j] = new_chunk + new_line_arr[j]
 
     if dot_for_blank:
-        return ' '.join(new_line_arr).replace('⠀', '⠄')
+        return line_delimiter.join(new_line_arr).replace('⠀', '⠄')
     else:
-        return ' '.join(new_line_arr)
+        return line_delimiter.join(new_line_arr)
 
 
-def turn_180(input_str, dot_for_blank=False):
-    return turn_90(turn_90(input_str, dot_for_blank), dot_for_blank)
+def turn_180(input_str, line_delimiter='\n', dot_for_blank=False):
+    return turn_90(turn_90(input_str, line_delimiter, dot_for_blank), line_delimiter, dot_for_blank)
 
 
-def turn_270(input_str, dot_for_blank=False):
-    return turn_90(turn_180(input_str, dot_for_blank), dot_for_blank)
+def turn_270(input_str, line_delimiter='\n', dot_for_blank=False):
+    return turn_90(turn_180(input_str,line_delimiter, dot_for_blank), line_delimiter, dot_for_blank)

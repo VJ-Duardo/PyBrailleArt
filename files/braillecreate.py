@@ -7,7 +7,8 @@ from PIL import Image
 treshold = 0
 transparency = True
 
-def treshold_dithering(picture, color_treshold=105, line_delimiter='\n', dot_for_blank=True, fill_transparency=True, width=0, height=0):
+
+def treshold_dithering(picture, color_treshold=128, line_delimiter='\n', dot_for_blank=True, fill_transparency=True, width=0, height=0):
     global treshold, transparency
     treshold = color_treshold
     transparency = fill_transparency
@@ -26,6 +27,7 @@ def treshold_dithering(picture, color_treshold=105, line_delimiter='\n', dot_for
         return line_delimiter.join(result_arr)
 
 
+
 def ordered_dithering(picture, color_treshold=128, line_delimiter='\n', dot_for_blank=True, fill_transparency=True, width=0, height=0):
     picture = _resize_pic(picture, width, height)
 
@@ -40,6 +42,7 @@ def ordered_dithering(picture, color_treshold=128, line_delimiter='\n', dot_for_
                 picture.putpixel((x, y), (0, 0, 0, pixel[3]))
 
     return treshold_dithering(picture, 128, line_delimiter, dot_for_blank, fill_transparency, 0, 0)
+
 
 
 def floyd_steinberg_dithering(picture, color_treshold=1, line_delimiter='\n', dot_for_blank=True, fill_transparency=True, width=0, height=0):
@@ -70,6 +73,8 @@ def floyd_steinberg_dithering(picture, color_treshold=1, line_delimiter='\n', do
                     picture.putpixel((x+a, y+b), (new_colors[0], new_colors[1], new_colors[2], picture.getpixel((x+a, y+b))[3]))
 
     return treshold_dithering(picture, 128, line_delimiter, dot_for_blank, fill_transparency, 0, 0)
+
+
 
 
 def _resize_pic(picture, width, height):

@@ -1,5 +1,5 @@
 ﻿# PyBrailleArt
-This library can transform unicode-art made up of braille characters. It can invert and rotate any given unicode-art string.
+This library can transform unicode-art made up of braille characters. It can invert, rotate and mirror any given unicode-braille-art string.
 
 ## Usage
 Include both files *braille.py* and *braille_data.py* and import the functions with `from braille import *`. All functions take two parameters: 
@@ -111,3 +111,21 @@ Like the invert function, these functions have the `dot_for_blank` option to rep
 <br><br>
 Every line should have an even amount of characters. If not, the last single character of each line will get ignored and will not show up in the end result.
 
+## Mirror
+The mirror function mirrors the input string horizontally. <br>
+Example: 
+<p>⣿⣿⣿⣿⣿⣿⣿⡿⠿⠟⠛⠛⠋⠉⠉⠙⠉⠉⠉⠉⠛⠻⢿⣿⣿⣿⣿⣿⣿⣿ <br>
+⣿⣿⣿⣿⣿⠟⠉⠁⠠⠠⠠⠠⠠⠠⠠⠠⠠⠠⠠⠠⠠⠠⠠⠈⠙⠿⣿⣿⣿⣿ <br>
+⣿⣿⣿⡟⠋⠠⠠⠠⠠⠠⠠⠠⠠⠠⠠⠠⠠⠠⠠⠠⠠⠠⠠⠠⠠⠠⠈⢻⣿⣿ <br>
+⣿⣿⡟⠠⠠⠠⠠⠠⠠⠠⠠⠠⢀⢠⠠⢀⣠⡤⣢⡀⠠⠠⠠⠠⠠⠠⠠⠠⠹⣿ <br>
+⣿⡿⠠⠠⠠⠠⠠⢂⣾⣿⣀⣤⣴⣼⣿⣿⣿⣿⣮⣅⣀⡀⠠⠠⠠⠠⠠⠠⠠⠹ <br>
+⣿⡓⠠⠠⠠⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠂⠠⠠⠠⠠⠠⠠ <br>
+⣿⢫⣵⣤⣠⣟⡻⢿⣿⣿⣿⡿⣿⠛⠛⠛⠛⢿⣿⣿⣿⣿⡟⠠⠠⠠⠠⠠⠠⣰ <br>
+⣿⣾⣟⣫⣿⣿⣿⣿⣶⣭⣥⣯⣍⡉⣙⢪⢺⣿⠃⠉⠠⠠⠠⠠⠠⠠⠠⠠⠰⣿ <br>
+⣿⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣿⣿⠠⠠⠈⠠⠠⡀⠄⠠⠠⢀⣴⣿ <br>
+⡿⠎⢛⣿⣿⣿⣿⣿⣿⣿⠿⠋⣡⣴⣿⣿⣿⣿⠠⠠⠠⢺⣶⠆⠠⠠⢰⣿⣿⣿ <br>
+⢀⣴⣿⣿⣿⣿⣿⣿⣿⣏⣽⣿⣻⣿⠿⠿⢿⠅⠠⠠⠠⣿⠿⠠⠠⢀⣿⣿⣿⣿ <br>
+⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡷⡶⠂⠠⠠⣴⡾⠠⠠⠠⣾⣿⣿⣿⣿ <br>
+⠠⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣯⡉⠠⠠⠠⠉⠠⠠⢠⣼⣿⣿⣿⣿⣿ <br>
+⠠⠠⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠛⠁⠠⠠⠠⠠⠠⠠⠙⠻⣿⣿⣿⣿⣿ <br>
+⠠⠠⠠⠠⠙⠿⣿⣿⣿⣿⣿⡿⠿⠃⠠⠠⠠⠠⠠⠠⠠⠠⠠⠠⠠⠠⠉⠛⠿⣿ </p>

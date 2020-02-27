@@ -6,7 +6,7 @@ from PIL import Image
 
 
 #braillecreate
-pic = Image.open("test.png").convert('RGBA')
+pic = Image.open("example.png").convert('RGBA')
 
 print(treshold_dithering(pic))
 print(treshold_dithering(pic, 145, width=100, height=100))
